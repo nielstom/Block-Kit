@@ -11,6 +11,7 @@ WIDTH = 1300
 HEIGHT = 600
 PLACE_EVENT = pygame.USEREVENT + 1
 PICKUP_EVENT = pygame.USEREVENT + 2
+RESTART_EVENT = pygame.USEREVENT + 3
 
 
 class Sprite(pygame.sprite.Sprite):
@@ -117,8 +118,8 @@ class Player(Sprite):
                             self.holding_box = True
                             pygame.event.post(pygame.event.Event(PICKUP_EVENT))
 
-        if pressed_keys[K_ESCAPE]:  # Quit
-            pygame.event.post(pygame.event.Event(QUIT))
+        if pressed_keys[K_ESCAPE]:  # Restart Level
+            pygame.event.post(pygame.event.Event(RESTART_EVENT))
 
 
 def level_main(level_number):
@@ -185,6 +186,11 @@ def level_main(level_number):
                 for i in range(len(blocks_x)):
                     blocks.add(Block(blocks_x[i], blocks_y[i]))
                 bricks_and_blocks.add(blocks)
+
+            if event.type == RESTART_EVENT:
+                # Restart level
+                level_main(level_number)
+                return
 
             if event.type == QUIT:
                 pygame.quit()
