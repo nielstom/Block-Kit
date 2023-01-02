@@ -3,7 +3,8 @@ from pygame.locals import *
 import sys
 import time
 
-# TODO: Wrapper for main menu (NEW, PASSWORD, HELP),
+# TODO: Level Generator
+# TODO: xml level parsing
 
 BLOCK_SIZE = 60
 WIDTH = 1300
@@ -117,37 +118,40 @@ class Player(Sprite):
                             pygame.event.post(pygame.event.Event(PICKUP_EVENT))
 
         if pressed_keys[K_ESCAPE]:  # Quit
-            pygame.quit()
-            sys.exit()
+            pygame.event.post(pygame.event.Event(QUIT))
 
 
-def main():
+def level_main(level_number):
     pygame.init()
 
+    WHITE = (255, 255, 255)
     FPS = 10
-
     FramePerSec = pygame.time.Clock()
-
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("Block Kit")
-
-    player = Player(17, 5)
+    pygame.display.set_caption("Block Kit - Level " + str(level_number))
 
     doors = pygame.sprite.Group()
-    doors.add(Door(2, 5))
-
     bricks = pygame.sprite.Group()
+    blocks = pygame.sprite.Group()
+
+    # TODO: Read from configure file (fct of level_number) -------------------------------------
+    player_x = 17
+    player_y = 5
+    door_x = 2
+    door_y = 5
     bricks_x = 1, 1, 1, 1, 1, 1, 2, 3, 4, 5, 5, 5, 6, 7, 8, 9, 9, 10, 11, 12, 13, 13, 13, 14, 15, 16, 17, 18, 19, 20, 20, 20, 20, 20, 20
     bricks_y = 1, 2, 3, 4, 5, 6, 6, 6, 6, 6, 5, 4, 6, 6, 6, 6, 5,  6,  6,  6,  6,  5,  4,  6,  6,  6,  6,  6,  6,  6,  5,  4,  3,  2,  1
-    for i in range(len(bricks_x)):
-        bricks.add(Brick(bricks_x[i], bricks_y[i]))
-
-    blocks = pygame.sprite.Group()
     blocks_x = [11, 15]
     blocks_y = [5,   5]
+    # Read and update WIDTH, HEIGHT, BLOCK_SIZE from config file
+    # TODO: Read from configure file (fct of level_number) -------------------------------------
+
+    player = Player(player_x, player_y)
+    doors.add(Door(door_x, door_y))
+    for i in range(len(bricks_x)):
+        bricks.add(Brick(bricks_x[i], bricks_y[i]))
     for i in range(len(blocks_x)):
         blocks.add(Block(blocks_x[i], blocks_y[i]))
-
     bricks_and_blocks = pygame.sprite.Group()
     bricks_and_blocks.add(bricks)
     bricks_and_blocks.add(blocks)
@@ -186,14 +190,9 @@ def main():
                 pygame.quit()
                 sys.exit()
 
-        WHITE = (255, 255, 255)
         screen.fill(WHITE)
         player.draw(screen)
         bricks_and_blocks.draw(screen)
         doors.draw(screen)
         pygame.display.update()
         FramePerSec.tick(FPS)
-
-
-if __name__ == "__main__":
-    main()
