@@ -12,5 +12,7 @@ Up Arrow: Climb
 
 Space: Pickup/Place a Block
 
+Esc: Restart Level
+
 ## Goal
 Arrange the blocks by any means to reach dinner! 
