@@ -19,3 +19,5 @@ Developed for hobby purposes only. Not claiming intellectual rights.
 
 ## Goal
 Arrange the blocks by any means to reach dinner! 🐭
+
+![Gameplay](Gameplay.PNG)
