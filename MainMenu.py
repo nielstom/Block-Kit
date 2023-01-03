@@ -32,7 +32,7 @@ def show_controls():
 
 
 def start_the_game():
-    max_level = 11
+    max_level = 12
     for i in range(level, max_level+1):
         BlockKit.level_main(i)
     pygame.event.post(pygame.event.Event(GAME_COMPLETE_EVENT))
@@ -46,7 +46,7 @@ def main():
     pygame.display.set_caption("Block Kit")
     WHITE = (255, 255, 255)
     mainmenu.add.button('Play', start_the_game)
-    mainmenu.add.selector('Level', [('1', 1), ('2', 2), ('3', 3), ('4', 4), ('5', 5), ('6', 6), ('7', 7), ('8', 8), ('9', 9), ('10', 10), ('11', 11)],
+    mainmenu.add.selector('Level', [('1', 1), ('2', 2), ('3', 3), ('4', 4), ('5', 5), ('6', 6), ('7', 7), ('8', 8), ('9', 9), ('10', 10), ('11', 11), ('12', 12)],
                           onchange=set_level, style='fancy', style_fancy_arrow_margin=(0, 0, 0),
                           style_fancy_bgcolor=(0, 0, 0, 0), style_fancy_bordercolor=(0, 0, 0, 0),
                           style_fancy_arrow_color=(0, 132, 201))

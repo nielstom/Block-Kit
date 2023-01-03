@@ -42,71 +42,73 @@ while not done:
             done = True
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            pos = pygame.mouse.get_pos()
-            column = pos[0] // (WIDTH + MARGIN)
-            row = pos[1] // (HEIGHT + MARGIN)
-            grid[row][column] += 1  # Increment object type
-            if grid[row][column] > PLAYER:
-                grid[row][column] = 0
-            # print("Click ", pos, "Grid coordinates: ", row, column)
+            try:
+                pos = pygame.mouse.get_pos()
+                column = pos[0] // (WIDTH + MARGIN)
+                row = pos[1] // (HEIGHT + MARGIN)
+                grid[row][column] += 1  # Increment object type
+                if grid[row][column] > PLAYER:
+                    grid[row][column] = 0
 
-            min_row = 99999
-            min_col = 99999
-            for row in range(NROWS):
-                for column in range(NCOLS):
-                    if grid[row][column] != 0:
-                        min_row = min(min_row, row)
-                        min_col = min(min_col, column)
+                min_row = 99999
+                min_col = 99999
+                for row in range(NROWS):
+                    for column in range(NCOLS):
+                        if grid[row][column] != 0:
+                            min_row = min(min_row, row)
+                            min_col = min(min_col, column)
 
-            print("\n"*100)
+                print("\n"*100)
 
-            print("bricks_x = ", end="")
-            for row in range(NROWS):
-                for column in range(NCOLS):
-                    if grid[row][column] == BRICK:
-                        print(column-min_col+1, end=", ")
-            print("\b\b")
-            print("bricks_y = ", end="")
-            for row in range(NROWS):
-                for column in range(NCOLS):
-                    if grid[row][column] == BRICK:
-                        print(row-min_row+1, end=", ")
-            print("\b\b")
+                print("bricks_x = ", end="")
+                for row in range(NROWS):
+                    for column in range(NCOLS):
+                        if grid[row][column] == BRICK:
+                            print(column-min_col+1, end=", ")
+                print("\b\b")
+                print("bricks_y = ", end="")
+                for row in range(NROWS):
+                    for column in range(NCOLS):
+                        if grid[row][column] == BRICK:
+                            print(row-min_row+1, end=", ")
+                print("\b\b")
 
-            print("blocks_x = [", end="")
-            for row in range(NROWS):
-                for column in range(NCOLS):
-                    if grid[row][column] == BLOCK:
-                        print(column-min_col+1, end=", ")
-            print("\b\b]")
-            print("blocks_y = [", end="")
-            for row in range(NROWS):
-                for column in range(NCOLS):
-                    if grid[row][column] == BLOCK:
-                        print(row-min_row+1, end=", ")
-            print("\b\b]")
+                print("blocks_x = [", end="")
+                for row in range(NROWS):
+                    for column in range(NCOLS):
+                        if grid[row][column] == BLOCK:
+                            print(column-min_col+1, end=", ")
+                print("\b\b]")
+                print("blocks_y = [", end="")
+                for row in range(NROWS):
+                    for column in range(NCOLS):
+                        if grid[row][column] == BLOCK:
+                            print(row-min_row+1, end=", ")
+                print("\b\b]")
 
-            print("door_x = ", end="")
-            for row in range(NROWS):
-                for column in range(NCOLS):
-                    if grid[row][column] == DOOR:
-                        print(column-min_col+1)
-            print("door_y = ", end="")
-            for row in range(NROWS):
-                for column in range(NCOLS):
-                    if grid[row][column] == DOOR:
-                        print(row-min_row+1)
+                print("door_x = ", end="")
+                for row in range(NROWS):
+                    for column in range(NCOLS):
+                        if grid[row][column] == DOOR:
+                            print(column-min_col+1)
+                print("door_y = ", end="")
+                for row in range(NROWS):
+                    for column in range(NCOLS):
+                        if grid[row][column] == DOOR:
+                            print(row-min_row+1)
 
-            print("player_x = ", end="")
-            for row in range(NROWS):
-                for column in range(NCOLS):
-                    if grid[row][column] == PLAYER:
-                        print(column-min_col+1)
-            print("player_y = ", end="")
-            for row in range(NROWS):
-                for column in range(NCOLS):
-                    if grid[row][column] == PLAYER:
-                        print(row-min_row+1)
+                print("player_x = ", end="")
+                for row in range(NROWS):
+                    for column in range(NCOLS):
+                        if grid[row][column] == PLAYER:
+                            print(column-min_col+1)
+                print("player_y = ", end="")
+                for row in range(NROWS):
+                    for column in range(NCOLS):
+                        if grid[row][column] == PLAYER:
+                            print(row-min_row+1)
+            except:
+                pass
 
     screen.fill(BLACK)
     for row in range(NROWS):
